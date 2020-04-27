@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import $ from 'jquery'
 
 import { login } from '../actions'
@@ -8,11 +9,13 @@ class Login extends Component {
   postLogin = () => {
     const email = $('input[name="email"]').val()
     const password = $('input[name="password"]').val()
-
     this.props.dispatchLogin(email, password)
   };
 
   render () {
+    if (this.props.user) {
+      return <Redirect to="/" />
+    }
     return (
       <div>
         <table>
